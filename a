@@ -12,41 +12,35 @@ class Program
 
     static void Corrida()
     {
-        string[] frames = new string[]
+        string[][] frames = new string[][]
         {
-@"
-  O
- /|\
- / \
-",
-@"
-  O
- /|\
-  /\
-",
-@"
-  O
- /|\
- / \
-",
-@"
-  O
- /|\
- /  \
-"
+            new string[]
+            {
+                "  O  ",
+                " /|\\ ",
+                " / \\ "
+            },
+            new string[]
+            {
+                "  O  ",
+                " /|\\ ",
+                "  /\\ "
+            }
         };
 
         int largura = Console.WindowWidth;
 
-        for (int x = 0; x < largura - 15; x++)
+        for (int x = 0; x < largura - 10; x++)
         {
             Console.Clear();
 
-            // Alterna os frames da corrida
-            string frameAtual = frames[x % frames.Length];
+            string[] frame = frames[x % frames.Length];
 
-            Console.SetCursorPosition(x, 5);
-            Console.WriteLine(frameAtual);
+            for (int y = 0; y < frame.Length; y++)
+            {
+                Console.SetCursorPosition(x, 5 + y);
+                Console.Write(frame[y]);
+            }
 
             Console.SetCursorPosition(x, 10);
             Console.Write("VAI CORINTHIANS!!! ⚫⚪");
