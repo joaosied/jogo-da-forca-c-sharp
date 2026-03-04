@@ -1,0 +1,48 @@
+using System;
+using System.Threading;
+
+class Program
+{
+    static void Main()
+    {
+        Comemoracao();
+    }
+
+    static void Comemoracao()
+    {
+        string[] frames = new string[]
+        {
+@"
+  \O/
+   |
+  / \
+",
+@"
+   O
+  /|\
+  / \
+",
+@"
+  \O/
+   |
+  / \
+",
+@"
+   O
+  \|/
+  / \
+"
+        };
+
+        for (int i = 0; i < 10; i++) // repete animação
+        {
+            foreach (string frame in frames)
+            {
+                Console.Clear();
+                Console.WriteLine("🎉 EU ESCAPEI DA FORCA! 🎉\n");
+                Console.WriteLine(frame);
+                Thread.Sleep(200); // pausa 200ms
+            }
+        }
+    }
+}
