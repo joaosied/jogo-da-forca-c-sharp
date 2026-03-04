@@ -1,0 +1,60 @@
+using System;
+using System.Threading;
+
+class Program
+{
+    static void Main()
+    {
+        Console.CursorVisible = false;
+        Corrida();
+        Console.CursorVisible = true;
+    }
+
+    static void Corrida()
+    {
+        string[] frames = new string[]
+        {
+@"
+  O
+ /|\
+ / \
+",
+@"
+  O
+ /|\
+  /\
+",
+@"
+  O
+ /|\
+ / \
+",
+@"
+  O
+ /|\
+ /  \
+"
+        };
+
+        int largura = Console.WindowWidth;
+
+        for (int x = 0; x < largura - 15; x++)
+        {
+            Console.Clear();
+
+            // Alterna os frames da corrida
+            string frameAtual = frames[x % frames.Length];
+
+            Console.SetCursorPosition(x, 5);
+            Console.WriteLine(frameAtual);
+
+            Console.SetCursorPosition(x, 10);
+            Console.Write("VAI CORINTHIANS!!! ⚫⚪");
+
+            Thread.Sleep(80);
+        }
+
+        Console.SetCursorPosition(0, 15);
+        Console.WriteLine("🏆 GOL DO TIMÃO!!!");
+    }
+}
