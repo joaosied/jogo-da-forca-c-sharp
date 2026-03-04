@@ -1,0 +1,14 @@
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/bin/Debug/net10.0/JogoForca
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/bin/Debug/net10.0/JogoForca.deps.json
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/bin/Debug/net10.0/JogoForca.runtimeconfig.json
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/bin/Debug/net10.0/JogoForca.dll
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/bin/Debug/net10.0/JogoForca.pdb
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/obj/Debug/net10.0/JogoForca.GeneratedMSBuildEditorConfig.editorconfig
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/obj/Debug/net10.0/JogoForca.AssemblyInfoInputs.cache
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/obj/Debug/net10.0/JogoForca.AssemblyInfo.cs
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/obj/Debug/net10.0/JogoForca.csproj.CoreCompileInputs.cache
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/obj/Debug/net10.0/JogoForca.dll
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/obj/Debug/net10.0/refint/JogoForca.dll
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/obj/Debug/net10.0/JogoForca.pdb
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/obj/Debug/net10.0/JogoForca.genruntimeconfig.cache
+/Users/marceloyosetake/Desktop/meus-projetos/jogo-forca/JogoForca/obj/Debug/net10.0/ref/JogoForca.dll
