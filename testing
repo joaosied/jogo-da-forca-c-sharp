@@ -1,74 +1,12 @@
 using System;
+using System.ComponentModel;
 
 class Program
 {
     static void Main()
     {
 
-        string[] noErrorGame = new string[] {
-            @"       ╔══════╗",
-            @"       ║      ║",
-            @"              ║",
-            @"              ║",
-            @"              ║",
-            @"  ════════════╩",
-        };
-
-        string[] OneErrorGame = new string[] {
-            @"       ╔══════╗",
-            @"       ║      ║",
-            @"       O      ║",
-            @"              ║",
-            @"              ║",
-            @"  ════════════╩",
-        };
-
-        string[] TwoErrorGame = new string[] {
-            @"       ╔══════╗",
-            @"       ║      ║",
-            @"       O      ║",
-            @"       |      ║",
-            @"              ║",
-            @"  ════════════╩",
-        };
-
-        string[] ThreeErrorGame = new string[] {
-            @"       ╔══════╗",
-            @"       ║      ║",
-            @"       O      ║",
-            @"       |\     ║",
-            @"              ║",
-            @"  ════════════╩",
-        };
-
-        string[] FourErrorGame = new string[] {
-            @"       ╔══════╗",
-            @"       ║      ║",
-            @"       O      ║",
-            @"      /|\     ║",
-            @"              ║",
-            @"  ════════════╩",
-        };
-
-        string[] FiveErrorGame = new string[] {
-            @"       ╔══════╗",
-            @"       ║      ║",
-            @"       O      ║",
-            @"      /|\     ║",
-            @"      /       ║",
-            @"  ════════════╩",
-        };
-
-        string[] SixErrorGame = new string[] {
-            @"     FIM   DE   JOGO   ",
-            @"       ╔══════╗",
-            @"       ║      ║",
-            @"      X_X     ║",
-            @"      /|\     ║",
-            @"      / \     ║",
-            @"  ════════════╩",
-            @"      VOCE   PERDEU     ",
-        };
+       
 
         while (true)
         {
@@ -139,6 +77,11 @@ class Program
             TeamColor(timeEscolhido);
             Console.WriteLine($"Time definido: {timeEscolhido}");
             Console.WriteLine();
+
+            Console.WriteLine("Aperte qualquer tecla para continuar");
+            Console.ReadKey();
+            Console.Clear();
+
             Console.WriteLine($"{namePlayer1} Bem vindo ao Menu");
             Console.WriteLine("1- Jogar Contra Jogador");
             Console.WriteLine("2- Jogar com tema e palavra definidos");
@@ -147,19 +90,9 @@ class Program
             Console.WriteLine("0- Sair");
             int opt = Convert.ToInt32(Console.ReadLine());
 
-            switch (opt)
+            if (opt == 1)
             {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                default:
-                    break;
-
+                PlayPvP();
             }
 
             // definiçao de temas pre disponibilizados no sistema
@@ -174,209 +107,286 @@ class Program
             }
 
             string themePlayer = "";
+            //criacao do random que gera numeros aleatorios
+            Random random = new Random();
+            //cria o indice com o valor maximo definido no tamanho da array themes
+            int themeRandom = random.Next(themes.Length);
+            //faz o sorteio na array
+            themePlayer = themes[themeRandom];
+            Console.WriteLine($"Então o tema será: {themePlayer}");
 
-            if (themeChoice == 1)
-            {
-                Console.WriteLine("Qual Tema é a sua palavra?");
-                themePlayer = Console.ReadLine() ?? "";
-            }
-            else if (themeChoice == 2)
-            {
-                //criacao do random que gera numeros aleatorios
-                Random random = new Random();
-                //cria o indice com o valor maximo definido no tamanho da array themes
-                int themeRandom = random.Next(themes.Length);
-                //faz o sorteio na array
-                themePlayer = themes[themeRandom];
-                Console.WriteLine($"Então o tema será: {themePlayer}");
-            }
 
-            //escolha de palavra para o jgogador 2 acertar
-            Console.WriteLine("Digite uma palavra e aperte enter");
-            Console.WriteLine();
-            Console.WriteLine("A palavra escolhida é: ");
-            string palavraEscolhida = Console.ReadLine() ?? "";
-            palavraEscolhida = palavraEscolhida.ToUpper();
 
-            // validação de que nao é null
-            while (string.IsNullOrWhiteSpace(palavraEscolhida))
-            {
-                Console.WriteLine("⚠️ Você precisa digitar uma palavra válida!");
-                Console.Write("Digite novamente: ");
-                palavraEscolhida = Console.ReadLine() ?? "";
-            }
 
+        }
+    }
+
+    static void PlayPvP()
+    {
+
+        string[] noErrorGame = new string[] {
+            @"       ╔══════╗",
+            @"       ║      ║",
+            @"              ║",
+            @"              ║",
+            @"              ║",
+            @"  ════════════╩",
+        };
+
+        string[] OneErrorGame = new string[] {
+            @"       ╔══════╗",
+            @"       ║      ║",
+            @"       O      ║",
+            @"              ║",
+            @"              ║",
+            @"  ════════════╩",
+        };
+
+        string[] TwoErrorGame = new string[] {
+            @"       ╔══════╗",
+            @"       ║      ║",
+            @"       O      ║",
+            @"       |      ║",
+            @"              ║",
+            @"  ════════════╩",
+        };
+
+        string[] ThreeErrorGame = new string[] {
+            @"       ╔══════╗",
+            @"       ║      ║",
+            @"       O      ║",
+            @"       |\     ║",
+            @"              ║",
+            @"  ════════════╩",
+        };
+
+        string[] FourErrorGame = new string[] {
+            @"       ╔══════╗",
+            @"       ║      ║",
+            @"       O      ║",
+            @"      /|\     ║",
+            @"              ║",
+            @"  ════════════╩",
+        };
+
+        string[] FiveErrorGame = new string[] {
+            @"       ╔══════╗",
+            @"       ║      ║",
+            @"       O      ║",
+            @"      /|\     ║",
+            @"      /       ║",
+            @"  ════════════╩",
+        };
+
+        string[] SixErrorGame = new string[] {
+            @"     FIM   DE   JOGO   ",
+            @"       ╔══════╗",
+            @"       ║      ║",
+            @"      X_X     ║",
+            @"      /|\     ║",
+            @"      / \     ║",
+            @"  ════════════╩",
+            @"      VOCE   PERDEU     ",
+        };
+
+        Console.WriteLine("Qual Tema é a sua palavra?");
+        string themePlayer = Console.ReadLine() ?? "";
+
+
+
+        //escolha de palavra para o jgogador 2 acertar
+        Console.WriteLine("Digite uma palavra e aperte enter");
+        Console.WriteLine();
+        Console.WriteLine("A palavra escolhida é: ");
+        string palavraEscolhida = Console.ReadLine() ?? "";
+        palavraEscolhida = palavraEscolhida.ToUpper();
+
+        // validação de que nao é null
+        while (string.IsNullOrWhiteSpace(palavraEscolhida))
+        {
+            Console.WriteLine("⚠️ Você precisa digitar uma palavra válida!");
+            Console.Write("Digite novamente: ");
+            palavraEscolhida = Console.ReadLine() ?? "";
+        }
+
+        Console.Clear();
+        Console.WriteLine("AGORA É A VEZ DO SEGUNDO JOGADOR");
+        Console.WriteLine("Olá Jogador 2, me informe o seu nome: ");
+        string namePlayer2 = Console.ReadLine() ?? "";
+        // validação obrigatória
+        while (string.IsNullOrWhiteSpace(namePlayer2))
+        {
+            Console.WriteLine("⚠️ Você precisa digitar uma palavra válida!");
+            Console.Write("Digite novamente: ");
+            namePlayer2 = Console.ReadLine() ?? "";
+        }
+        namePlayer2 = namePlayer2.ToUpper();
+
+        string[] letrasIdentificadas = new string[palavraEscolhida.Length];
+
+        int limitErrors = 6;
+        int quantityErrors = 0;
+        int tamanhoPalavra = palavraEscolhida.Length;
+
+        bool JogoAndamento = true;
+        do
+        {
+            //apaga todo o console pro jogador nao ver a palavra
             Console.Clear();
-            Console.WriteLine("AGORA É A VEZ DO SEGUNDO JOGADOR");
-            Console.WriteLine("Olá Jogador 2, me informe o seu nome: ");
-            string namePlayer2 = Console.ReadLine() ?? "";
-            // validação obrigatória
-            while (string.IsNullOrWhiteSpace(namePlayer2))
+            Console.WriteLine($"Vamos lá, {namePlayer2}");
+            Console.WriteLine($"O tema da palavra é: {themePlayer}");
+
+            string[] desenhoForca;
+
+            //define o bonequinho da forca que vai aparecer de acordo com os erros cometidos pelo jogador
+            switch (quantityErrors)
             {
-                Console.WriteLine("⚠️ Você precisa digitar uma palavra válida!");
-                Console.Write("Digite novamente: ");
-                namePlayer2 = Console.ReadLine() ?? "";
-            }
-            namePlayer2 = namePlayer2.ToUpper();
-
-            string[] letrasIdentificadas = new string[palavraEscolhida.Length];
-
-            int limitErrors = 6;
-            int quantityErrors = 0;
-            int tamanhoPalavra = palavraEscolhida.Length;
-
-            bool JogoAndamento = true;
-            do
-            {
-                //apaga todo o console pro jogador nao ver a palavra
-                Console.Clear();
-                Console.WriteLine($"Vamos lá, {namePlayer2}");
-                Console.WriteLine($"O tema da palavra é: {themePlayer}");
-
-                string[] desenhoForca;
-
-                //define o bonequinho da forca que vai aparecer de acordo com os erros cometidos pelo jogador
-                switch (quantityErrors)
-                {
-                    case 1:
-                        desenhoForca = OneErrorGame;
-                        break;
-                    case 2:
-                        desenhoForca = TwoErrorGame;
-                        break;
-                    case 3:
-                        desenhoForca = ThreeErrorGame;
-                        break;
-                    case 4:
-                        desenhoForca = FourErrorGame;
-                        break;
-                    case 5:
-                        desenhoForca = FiveErrorGame;
-                        break;
-                    case 6:
-                        desenhoForca = SixErrorGame;
-                        break;
-                    default:
-                        desenhoForca = noErrorGame;
-                        break;
-                }
-
-                //logica para o desenho ser mostrado de acordo com os erros
-                for (int i = 0; i < desenhoForca.Length; i++)
-                {
-                    Console.WriteLine(desenhoForca[i]);
-                }
-                
-                //se a quantidade de erros for igual ao limite de erros permitidos o sistema para
-                if (quantityErrors == limitErrors)
-                {
+                case 1:
+                    desenhoForca = OneErrorGame;
+                    Console.WriteLine("Voce pode ter mais 5 erros");
                     break;
+                case 2:
+                    desenhoForca = TwoErrorGame;
+                    Console.WriteLine("Voce pode ter mais 4 erros");
+                    break;
+                case 3:
+                    desenhoForca = ThreeErrorGame;
+                    Console.WriteLine("Voce pode ter mais 3 erros");
+                    break;
+                case 4:
+                    desenhoForca = FourErrorGame;
+                    Console.WriteLine("Voce pode ter mais 2 erros");
+                    break;
+                case 5:
+                    desenhoForca = FiveErrorGame;
+                    Console.WriteLine("Voce pode ter mais 1 erro");
+                    Console.WriteLine($"A palavra era {palavraEscolhida}");
+                    break;
+                case 6:
+                    desenhoForca = SixErrorGame;
+                    break;
+                default:
+                    desenhoForca = noErrorGame;
+                    break;
+            }
+
+            //logica para o desenho ser mostrado de acordo com os erros
+            for (int i = 0; i < desenhoForca.Length; i++)
+            {
+                Console.WriteLine(desenhoForca[i]);
+            }
+
+            //se a quantidade de erros for igual ao limite de erros permitidos o sistema para
+            if (quantityErrors == limitErrors)
+            {
+                break;
+            }
+
+            //define a quantidade de traços que vao aparecer para o jogador acertar a palavra
+            for (int i = 0; i < letrasIdentificadas.Length; i++)
+            {
+                string letraAtual = letrasIdentificadas[i];
+                if (letraAtual == null)
+                {
+                    Console.Write("-");
+                }
+                else
+                {
+                    Console.Write(letraAtual);
+                }
+                Thread.Sleep(100); //define um delayzinho pra aparecer animado os tracinhos
+
+            }
+
+            string letraEscolhida;
+            List<string> letrasDigitadas = new List<string>();
+
+            Console.WriteLine();
+            Console.WriteLine("Escolha uma letra para tentar adivinhar a palavra");
+            Console.WriteLine("Letras ja tentadas:");
+            
+      
+
+            // validações de que o caractere digitado é permitido
+            while (true)
+            {
+                Console.Write("A letra escolhida é: ");
+                letraEscolhida = Console.ReadLine() ?? "";
+
+                if (string.IsNullOrWhiteSpace(letraEscolhida))
+                {
+                    Console.WriteLine("⚠️ Digite uma letra!");
+                    continue;
                 }
 
-                //define a quantidade de traços que vao aparecer para o jogador acertar a palavra
+                if (!char.IsLetter(letraEscolhida[0]))
+                {
+                    Console.WriteLine("⚠️ Apenas letras são permitidas!");
+                    continue;
+                }
+
+
+                // se passou em tudo = sai do loop
+                letraEscolhida = letraEscolhida.ToUpper();
+                letrasDigitadas.Add(letraEscolhida);
+                break;
+            }
+
+            bool letraEncontrada = false;
+
+            // logica para aparecerem as letras corretas ao inves do traço
+            for (int i = 0; i < tamanhoPalavra; i++)
+            {
+                string letraAtual = palavraEscolhida[i].ToString();
+                if (letraAtual == letraEscolhida)
+                {
+                    letrasIdentificadas[i] = letraAtual;
+                    letraEncontrada = true;
+                }
+            }
+            if (letraEncontrada)
+            {
+                //definicao de que se o jogo acabou ou nao
+                bool todasLetrasIdentificadas = true;
                 for (int i = 0; i < letrasIdentificadas.Length; i++)
                 {
                     string letraAtual = letrasIdentificadas[i];
                     if (letraAtual == null)
                     {
-                        Console.Write("-");
+                        todasLetrasIdentificadas = false;
                     }
-                    else
-                    {
-                        Console.Write(letraAtual);
-                    }
-                    Thread.Sleep(100); //define um delayzinho pra aparecer animado os tracinhos
-
                 }
+
+                if (todasLetrasIdentificadas || letraEscolhida == palavraEscolhida)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Parabens, {namePlayer2} voce adivinhou a palavra: " + palavraEscolhida);
+                    Console.WriteLine();
+                    Console.Clear();
+
+                    Console.CursorVisible = false;
+                    Corrida();
+                    Console.CursorVisible = true;
+
+                    JogoAndamento = false;
+                }
+            }
+            else
+            {
+                // jogador errou a letra
+                quantityErrors++;
 
                 Console.WriteLine();
-                Console.WriteLine("Escolha uma letra para tentar adivinhar a palavra");
-                string letraEscolhida;
+                Console.WriteLine("A letra (" + letraEscolhida + (") nao esta correta"));
+                Console.WriteLine();
+                Console.WriteLine("Aperte qualquer tecla para prosseguir");
+                Console.ReadKey();
+            }
+        } while (JogoAndamento);
 
-                // validações de que o caractere digitado é permitido
-                while (true)
-                {
-                    Console.Write("A letra escolhida é: ");
-                    letraEscolhida = Console.ReadLine() ?? "";
+}
 
-                    if (string.IsNullOrWhiteSpace(letraEscolhida))
-                    {
-                        Console.WriteLine("⚠️ Digite uma letra!");
-                        continue;
-                    }
-
-                    if (letraEscolhida.Length != 1)
-                    {
-                        Console.WriteLine("⚠️ Digite apenas UMA letra!");
-                        continue;
-                    }
-
-                    if (!char.IsLetter(letraEscolhida[0]))
-                    {
-                        Console.WriteLine("⚠️ Apenas letras são permitidas!");
-                        continue;
-                    }
-
-                    // se passou em tudo = sai do loop
-                    letraEscolhida = letraEscolhida.ToUpper();
-                    break;
-                }
-
-                bool letraEncontrada = false;
-
-                // logica para aparecerem as letras corretas ao inves do traço
-                for (int i = 0; i < tamanhoPalavra; i++)
-                {
-                    string letraAtual = palavraEscolhida[i].ToString();
-                    if (letraAtual == letraEscolhida)
-                    {
-                        letrasIdentificadas[i] = letraAtual;
-                        letraEncontrada = true;
-                    }
-                }
-                if (letraEncontrada)
-                {
-                    //definicao de que se o jogo acabou ou nao
-                    bool todasLetrasIdentificadas = true;
-                    for (int i = 0; i < letrasIdentificadas.Length; i++)
-                    {
-                        string letraAtual = letrasIdentificadas[i];
-                        if (letraAtual == null)
-                        {
-                            todasLetrasIdentificadas = false;
-                        }
-                    }
-
-                    if (todasLetrasIdentificadas)
-                    {
-                        Console.WriteLine();
-                        Console.WriteLine($"Parabens, {namePlayer2} voce adivinhou a palavra: " + palavraEscolhida);
-                        Console.WriteLine();
-                        Console.Clear();
-
-                        Console.CursorVisible = false;
-                        Corrida();
-                        Console.CursorVisible = true;
-
-                        JogoAndamento = false;
-                    }
-                }
-                else
-                {
-                    // jogador errou a letra
-                    quantityErrors++;
-
-                    Console.WriteLine();
-                    Console.WriteLine("A letra (" + letraEscolhida + (") nao esta correta"));
-                    Console.WriteLine();
-                    Console.WriteLine("Aperte qualquer tecla para prosseguir");
-                    Console.ReadKey();
-                }
-            } while (JogoAndamento);
-        }
-    }
-
-//função que salva as cores dos times usados para escolha do usuario
+    //função que salva as cores dos times usados para escolha do usuario
     static void TeamColor(string time)
     {
         Console.ResetColor();
@@ -401,7 +411,7 @@ class Program
     }
 
 
-// funcao que cria a corrida pós vitoria do jogador
+    // funcao que cria a corrida pós vitoria do jogador
     static void Corrida()
     {
         string[][] frames = new string[][]
