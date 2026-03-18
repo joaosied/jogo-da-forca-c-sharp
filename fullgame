@@ -1,0 +1,345 @@
+using System;
+using System.Collections.Generic;
+using System.Threading;
+
+class Program
+{
+    static int vitorias = 0;
+    static int derrotas = 0;
+    static int tentativasMax = 6;
+
+    static void Main()
+    {
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("=== JOGO DA FORCA ===");
+            Console.WriteLine("1- Jogar (2 jogadores)");
+            Console.WriteLine("2- Jogar (palavra aleatória)");
+            Console.WriteLine("3- Configurações");
+            Console.WriteLine("4- Estatísticas");
+            Console.WriteLine("0- Sair");
+
+            if (!int.TryParse(Console.ReadLine(), out int opt))
+                continue;
+
+            switch (opt)
+            {
+                case 1:
+                    PlayPvP();
+                    break;
+                case 2:
+                    PlayRandom();
+                    break;
+                case 3:
+                    Configuracoes();
+                    break;
+                case 4:
+                    MostrarStats();
+                    break;
+                case 0:
+                    return;
+            }
+        }
+    }
+
+    // =========================
+    // MODO 2 JOGADORES
+    // =========================
+    static void PlayPvP()
+    {
+        Console.Clear();
+
+        Console.Write("Jogador 1, seu nome: ");
+        string player1 = Console.ReadLine()?.ToUpper() ?? "";
+
+        Console.Write("Tema da palavra: ");
+        string tema = Console.ReadLine() ?? "";
+
+        Console.Write("Digite a palavra: ");
+        string palavra = Console.ReadLine()?.ToUpper() ?? "";
+
+        while (string.IsNullOrWhiteSpace(palavra))
+        {
+            Console.Write("Digite uma palavra válida: ");
+            palavra = Console.ReadLine()?.ToUpper() ?? "";
+        }
+
+        Console.Clear();
+        Console.WriteLine("Agora é a vez do Jogador 2!");
+        Console.ReadKey();
+
+        EscolherTime();
+
+        PlayGame(palavra, tema);
+    }
+
+    // =========================
+    // MODO ALEATÓRIO
+    // =========================
+    static void PlayRandom()
+    {
+        string[] palavras = {
+            "COMPUTADOR","FUTEBOL","PROGRAMACAO",
+            "ANIMAL","BRASIL","ENGENHARIA","CORINTHIANS"
+        };
+
+        Random random = new Random();
+        string palavra = palavras[random.Next(palavras.Length)];
+
+        EscolherTime();
+
+        PlayGame(palavra, "Aleatório");
+    }
+
+    // =========================
+    // MOTOR DO JOGO
+    // =========================
+    static void PlayGame(string palavra, string tema)
+    {
+        string[] letras = new string[palavra.Length];
+        List<string> usadas = new List<string>();
+
+        int erros = 0;
+
+        while (true)
+        {
+            Console.Clear();
+
+            Console.WriteLine($"Tema: {tema}");
+            Console.WriteLine($"Tentativas restantes: {tentativasMax - erros}");
+            Console.WriteLine();
+
+            // desenho
+            DesenharForca(erros);
+
+            // palavra
+            for (int i = 0; i < letras.Length; i++)
+                Console.Write(letras[i] ?? "_");
+
+            Console.WriteLine("\n");
+
+            // letras usadas
+            Console.WriteLine("Letras usadas: " + string.Join(", ", usadas));
+
+            Console.Write("\nDigite letra ou palavra: ");
+            string entrada = Console.ReadLine()?.ToUpper() ?? "";
+
+            if (string.IsNullOrWhiteSpace(entrada))
+                continue;
+
+            if (usadas.Contains(entrada))
+            {
+                Console.WriteLine("⚠️ Você já tentou isso!");
+                Console.ReadKey();
+                continue;
+            }
+
+            usadas.Add(entrada);
+
+            // chute palavra inteira
+            if (entrada.Length > 1)
+            {
+                if (entrada == palavra)
+                {
+                    Console.WriteLine("ACERTOU!");
+                    vitorias++;
+                    Corrida();
+                    break;
+                }
+                else
+                {
+                    erros++;
+                    continue;
+                }
+            }
+
+            bool achou = false;
+
+            for (int i = 0; i < palavra.Length; i++)
+            {
+                if (palavra[i].ToString() == entrada)
+                {
+                    letras[i] = entrada;
+                    achou = true;
+                }
+            }
+
+            if (!achou)
+                erros++;
+
+            // vitória
+            if (!Array.Exists(letras, l => l == null))
+            {
+                Console.WriteLine("\nVOCÊ GANHOU!");
+                vitorias++;
+                Corrida();
+                break;
+            }
+
+            // derrota
+            if (erros >= tentativasMax)
+            {
+                Console.WriteLine($"\nPERDEU! Palavra: {palavra}");
+                derrotas++;
+                break;
+            }
+        }
+
+        Console.WriteLine("\nPressione qualquer tecla...");
+        Console.ReadKey();
+    }
+
+    // =========================
+    // DESENHO FORCA
+    // =========================
+    static void DesenharForca(int erros)
+    {
+        string[][] forca = new string[][]
+        {
+            new string[] {
+                "  ╔══════╗",
+                "  ║      ║",
+                "         ║",
+                "         ║",
+                "         ║",
+                "═════════╩"
+            },
+            new string[] {
+                "  ╔══════╗",
+                "  ║      ║",
+                "  O      ║",
+                "         ║",
+                "         ║",
+                "═════════╩"
+            },
+            new string[] {
+                "  ╔══════╗",
+                "  ║      ║",
+                "  O      ║",
+                "  |      ║",
+                "         ║",
+                "═════════╩"
+            },
+            new string[] {
+                "  ╔══════╗",
+                "  ║      ║",
+                "  O      ║",
+                "  |\\     ║",
+                "         ║",
+                "═════════╩"
+            },
+            new string[] {
+                "  ╔══════╗",
+                "  ║      ║",
+                "  O      ║",
+                " /|\\     ║",
+                "         ║",
+                "═════════╩"
+            },
+            new string[] {
+                "  ╔══════╗",
+                "  ║      ║",
+                "  O      ║",
+                " /|\\     ║",
+                " /       ║",
+                "═════════╩"
+            },
+            new string[] {
+                "  ╔══════╗",
+                "  ║      ║",
+                " X_X     ║",
+                " /|\\     ║",
+                " / \\     ║",
+                "═════════╩"
+            }
+        };
+
+        foreach (var linha in forca[Math.Min(erros, 6)])
+            Console.WriteLine(linha);
+    }
+
+    // =========================
+    // TIME / CORES (SEU DIFERENCIAL)
+    // =========================
+    static void EscolherTime()
+    {
+        Console.WriteLine("\nEscolha seu time:");
+        Console.WriteLine("1 - Corinthians / 2 - CAP / 3 - Coxa / 4 - Nenhum");
+
+        int t = int.Parse(Console.ReadLine());
+
+        switch (t)
+        {
+            case 1:
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Black;
+                break;
+            case 2:
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = ConsoleColor.Black;
+                break;
+            case 3:
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.BackgroundColor = ConsoleColor.White;
+                break;
+            case 4:
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.WriteLine("Entao agora vocé é Corinthians, bem vindo ao bando de louco");
+                break;
+        }
+
+        Console.Clear();
+    }
+
+    // =========================
+    // CONFIGURAÇÕES
+    // =========================
+    static void Configuracoes()
+    {
+        Console.Write("Número de tentativas: ");
+        if (int.TryParse(Console.ReadLine(), out int val))
+            tentativasMax = val;
+    }
+
+    // =========================
+    // STATS
+    // =========================
+    static void MostrarStats()
+    {
+        Console.WriteLine($"Vitórias: {vitorias}");
+        Console.WriteLine($"Derrotas: {derrotas}");
+        Console.ReadKey();
+    }
+
+    // =========================
+    // ANIMAÇÃO (SEU TOQUE FINAL)
+    // =========================
+    static void Corrida()
+    {
+        string[][] frames = new string[][]
+        {
+            new string[] { " O ", "/|\\", "/ \\" },
+            new string[] { " O ", "/|\\", " /\\" }
+        };
+
+        for (int x = 0; x < Console.WindowWidth - 10; x++)
+        {
+            Console.Clear();
+
+            var frame = frames[x % 2];
+
+            for (int y = 0; y < frame.Length; y++)
+            {
+                Console.SetCursorPosition(x, 5 + y);
+                Console.Write(frame[y]);
+            }
+
+            Console.SetCursorPosition(x, 10);
+            Console.Write("VAI CORINTHIANS!!! ⚫⚪");
+
+            Thread.Sleep(80);
+        }
+    }
+}
